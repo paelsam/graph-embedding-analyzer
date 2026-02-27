@@ -200,6 +200,7 @@ const calculatePolarization = async () => {
     
     try {
         const adjMatrix = getAdjacencyMatrix();
+        const backendURL = import.meta.env.VITE_BACKEND_URL || '';
         
         let kParam = null;
         if (svdKMethod.value === 'custom') {
@@ -212,7 +213,7 @@ const calculatePolarization = async () => {
             payload.k = kParam;
         }
         
-        const response = await fetch('/api/polarization', {
+        const response = await fetch(`${backendURL}/api/polarization`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
